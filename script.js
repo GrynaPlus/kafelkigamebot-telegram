@@ -1,6 +1,19 @@
 // script.js
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Dodajemy meta viewport, jeśli jeszcze go nie ma, aby wyłączyć skalowanie
+  if (!document.querySelector('meta[name="viewport"]')) {
+    const meta = document.createElement('meta');
+    meta.name = 'viewport';
+    meta.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
+    document.head.appendChild(meta);
+  }
+
+  // Jeśli aplikacja jest uruchamiana w Telegramie, rozwiń ją na pełny ekran
+  if (window.Telegram && Telegram.WebApp) {
+    Telegram.WebApp.expand();
+  }
+
   // Sprawdzamy, czy w localStorage istnieje zapisana nazwa użytkownika
   const savedUsername = localStorage.getItem('username');
   if (savedUsername) {
