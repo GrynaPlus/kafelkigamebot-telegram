@@ -108,10 +108,12 @@ function subtractMove() {
   movesUsed++;
   localStorage.setItem('moves', moves);
   updateHeader();
+  // Jeśli ruchy się skończą, wyświetlamy modal z reklamą nagradzaną
   if (moves <= 0) {
     document.getElementById('adModal').style.display = 'flex';
   }
-  if (movesUsed > 20 && !skipModalShown) {
+  // Po wykonaniu 20 (lub więcej) ruchów wyświetlamy modal umożliwiający pominięcie poziomu
+  if (movesUsed >= 20 && !skipModalShown) {
     document.getElementById('skipModal').style.display = 'flex';
     skipModalShown = true;
   }
@@ -119,19 +121,17 @@ function subtractMove() {
 
 /* Funkcja nagradzająca – wywołanie rewarded interstitial ad */
 function rewardMoves() {
-  // Wywołanie rewarded interstitial – integracja z API reklamowym
-  show_9081118()
-    .then(() => {
-      // Po obejrzeniu reklamy użytkownik otrzymuje 50 ruchów
-      alert('You have seen an ad!');
-      moves += 50;
-      localStorage.setItem('moves', moves);
-      updateHeader();
-      document.getElementById('adModal').style.display = 'none';
-    })
-    .catch((error) => {
-      console.error('Error displaying ad:', error);
-    });
+  // Rewarded interstitial
+  show_9081118().then(() => {
+    // Po obejrzeniu reklamy użytkownik otrzymuje 50 ruchów
+    alert('You have seen an ad!');
+    moves += 50;
+    localStorage.setItem('moves', moves);
+    updateHeader();
+    document.getElementById('adModal').style.display = 'none';
+  }).catch((error) => {
+    console.error('Error displaying ad:', error);
+  });
 }
 
 /* Funkcja pomijająca poziom (po obejrzeniu reklamy w skip modal) */
