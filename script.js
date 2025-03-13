@@ -119,12 +119,11 @@ function subtractMove() {
   }
 }
 
-/* Funkcja nagradzająca – wywołanie rewarded interstitial ad */
+/* Funkcja nagradzająca – wywołanie rewarded interstitial ad dla dodatkowych ruchów */
 function rewardMoves() {
-  // Rewarded interstitial
+  // Wywołanie rewarded interstitial
   show_9081118().then(() => {
-    // Po obejrzeniu reklamy użytkownik otrzymuje 50 ruchów
-    alert('You have seen an ad!');
+    alert('Reklama obejrzana, otrzymujesz 50 ruchów!');
     moves += 50;
     localStorage.setItem('moves', moves);
     updateHeader();
@@ -134,15 +133,21 @@ function rewardMoves() {
   });
 }
 
-/* Funkcja pomijająca poziom (po obejrzeniu reklamy w skip modal) */
+/* Funkcja pomijająca poziom – najpierw wywołuje reklamę, a następnie pomija poziom */
 function skipLevel() {
-  level++;
-  localStorage.setItem('level', level);
-  movesUsed = 0;
-  skipModalShown = false;
-  initGame();
-  updateHeader();
-  document.getElementById('skipModal').style.display = 'none';
+  // Wywołanie rewarded interstitial dla pominięcia poziomu
+  show_9081118().then(() => {
+    alert('Reklama obejrzana, poziom został pominięty!');
+    level++;
+    localStorage.setItem('level', level);
+    movesUsed = 0;
+    skipModalShown = false;
+    initGame();
+    updateHeader();
+    document.getElementById('skipModal').style.display = 'none';
+  }).catch((error) => {
+    console.error('Error displaying ad:', error);
+  });
 }
 
 /* Inicjalizacja gry – tworzenie planszy 3x3 */
