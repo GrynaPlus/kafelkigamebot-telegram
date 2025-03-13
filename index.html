@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Gra z Kafelkami</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="//whephiwums.com/sdk.js" data-zone="9081118" data-sdk="show_9076387"></script>
+</head>
+<body>
+  <div id="game-container">
+    <!-- Modal ustawienia nazwy użytkownika -->
+    <div id="userModal" class="modal" style="display: flex;">
+      <div class="modal-content">
+        <h2>Wprowadź swoją nazwę</h2>
+        <input type="text" id="usernameInput" placeholder="Twoja nazwa">
+        <button id="startButton">Start</button>
+      </div>
+    </div>
+    
+    <!-- Modal do reklamy (gdy zabraknie ruchów) -->
+    <div id="adModal" class="modal">
+      <div class="modal-content">
+        <h2>Brak ruchów!</h2>
+        <p>Obejrzyj reklamę, aby otrzymać 50 dodatkowych ruchów.</p>
+        <button id="adButton">Oglądaj reklamę</button>
+      </div>
+    </div>
+    
+    <!-- Modal do pominięcia poziomu -->
+    <div id="skipModal" class="modal">
+      <div class="modal-content">
+        <h2>Pominąć poziom?</h2>
+        <p>Wykonałeś już ponad 20 ruchów. Czy chcesz obejrzeć reklamę, aby pominąć poziom?</p>
+        <button id="skipYesButton">Tak</button>
+        <button id="skipNoButton">Nie</button>
+      </div>
+    </div>
+    
+    <!-- Nagłówek z informacją o użytkowniku, poziomie i ruchach -->
+    <header id="headerInfo"></header>
+    
+    <!-- Guzik do zmiany gradientu puzzla -->
+    <button id="changeGradientButton">Zmień kolor gradientu</button>
+    
+    <!-- Plansza gry -->
+    <div id="gameBoard"></div>
+    
+    <!-- Komunikat o ukończeniu poziomu -->
+    <div id="message"></div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
