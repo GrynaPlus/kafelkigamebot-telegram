@@ -136,8 +136,8 @@ function subtractMove() {
 function rewardMoves() {
   // Wywołanie rewarded interstitial
   show_9081118().then(() => {
-    alert('Reklama obejrzana, otrzymujesz 50 ruchów!');
-    moves += 50;
+    alert('Reklama obejrzana, otrzymujesz 100 ruchów!');
+    moves += 100;
     localStorage.setItem('moves', moves);
     updateHeader();
     document.getElementById('adModal').style.display = 'none';
