@@ -328,6 +328,25 @@ function checkWin() {
   const messageDiv = document.getElementById('message');
   if (win) {
     messageDiv.innerHTML = `Gratulacje, ukończyłeś poziom ${level}!<br>`;
+    
+    // Wyświetl reklamę in-app interstitial po ukończeniu co 3 poziomu
+    if (level % 3 === 0) {
+      show_9081118({
+        type: 'inApp',
+        inAppSettings: { 
+          frequency: 2, 
+          capping: 0.1, 
+          interval: 30, 
+          timeout: 5, 
+          everyPage: false 
+        }
+      }).then(() => {
+        console.log("Interstitial ad displayed successfully.");
+      }).catch((error) => {
+        console.error("Error displaying interstitial ad:", error);
+      });
+    }
+    
     const nextLevelBtn = document.createElement('button');
     nextLevelBtn.textContent = "Następny poziom";
     nextLevelBtn.classList.add('next-level');
